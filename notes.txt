@@ -1,0 +1,1 @@
+1. When you press a number, it should check if that number 

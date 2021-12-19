@@ -1,0 +1,56 @@
+body {
+  display: flex;
+  justify-content: center;
+}
+
+#display {
+  height: 50px;
+  text-align: end;
+  line-height: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 32px;
+}
+.container {
+  width: 400px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  display: flex;
+  height: 1fr;
+  flex: 1;
+  column-gap: 4px;
+}
+
+button {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  border-width: 0px;
+  border-radius: 6px;
+}
+
+.numbers,
+.operators,
+.right {
+  display: grid;
+  column-gap: 4px;
+  row-gap: 4px;
+}
+.numbers {
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  flex-grow: 2;
+}
+
+.operators,
+.right {
+  flex-grow: 1;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+}
+
+.right {
+  grid-template-rows: 1fr 1fr;
+}
