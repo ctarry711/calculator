@@ -9,6 +9,12 @@ body {
   line-height: 50px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 32px;
+  border-width: 2px;
+  border-radius: 6px;
+  border-color: rgb(54, 54, 54);
+  border-style: solid;
+  margin: 4px;
+  padding-right: 4px;
 }
 .container {
   width: 400px;
@@ -53,4 +59,16 @@ button {
 
 .right {
   grid-template-rows: 1fr 1fr;
+}
+
+.equals {
+  background-color: rgb(190, 190, 190);
+}
+
+.mouse-hover {
+  background-color: lightblue;
+}
+
+.operation-pressed {
+  background-color: lightblue;
 }

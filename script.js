@@ -31,15 +31,27 @@ const factorial = function (a) {
   return total;
 };
 
+const round16 = function (a) {
+  return Math.round(a * 10 ** 16) / 10 ** 16;
+};
+
 let displayValue = "";
 let num1 = NaN;
 let num2 = NaN;
 buttons = document.querySelectorAll("button");
 display = document.querySelector("#display");
 buttons.forEach((btn) => {
+  btn.addEventListener("mouseenter", () => {
+    btn.classList.add("mouse-hover");
+  });
+  btn.addEventListener("mouseleave", () => {
+    btn.classList.remove("mouse-hover");
+  });
+
   btn.addEventListener("click", (e) => {
+    buttons.forEach((btn) => btn.classList.remove("operation-pressed"));
     btnPressed = btn.textContent;
-    if (parseInt(btnPressed) || parseInt(btnPressed) == 0) {
+    if (!isNaN(parseInt(btnPressed))) {
       displayValue += btnPressed;
       display.textContent = displayValue;
     } else if (btnPressed === "C") {
@@ -54,16 +66,17 @@ buttons.forEach((btn) => {
       btnPressed === "×" ||
       btnPressed === "÷"
     ) {
-      if (num1 || num1 == 0) {
+      if (!isNaN(num1)) {
         num2 = parseInt(displayValue);
         result = operator(num1, num2);
         displayValue = result;
         num1 = result;
-        num2 = 0;
-        display.textContent = displayValue;
+        num2 = NaN;
+        display.textContent = round16(displayValue);
         displayValue = "";
       } else {
         num1 = parseInt(displayValue);
+        btn.classList.add("operation-pressed");
         displayValue = "";
       }
       switch (btnPressed) {
@@ -81,17 +94,20 @@ buttons.forEach((btn) => {
           break;
       }
     } else if (btnPressed === "=") {
-      if (num1 || num1 == 0) {
-        num2 = parseInt(displayValue);
-        result = operator(num1, num2);
-        displayValue = result;
-        num1 = result;
-        num2 = 0;
-        display.textContent = displayValue;
-        displayValue = "";
-      } else {
-        num1 = parseInt(displayValue);
-        displayValue = "";
+      if (!isNaN(num1)) {
+        if (isNaN(num2)) {
+          btn.classList.remove("operation-pressed");
+          num2 = parseInt(displayValue);
+          result = operator(num1, num2);
+          displayValue = result;
+          num1 = result;
+          display.textContent = round16(displayValue);
+        } else {
+          num1 = result;
+          result = operator(num1, num2);
+          displayValue = result;
+          display.textContent = round16(displayValue);
+        }
       }
     }
   });
